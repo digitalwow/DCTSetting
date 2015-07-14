@@ -1,0 +1,14 @@
+D:\Asp.Net_Project\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.Form1.resources
+D:\Asp.Net_Project\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.Properties.Resources.resources
+D:\Asp.Net_Project\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.csproj.GenerateResource.Cache
+D:\Asp.Net_Project\DCTSetting\DCTSetting\bin\Debug\DCTSetting.exe.config
+D:\Asp.Net_Project\DCTSetting\DCTSetting\bin\Debug\DCTSetting.exe
+D:\Asp.Net_Project\DCTSetting\DCTSetting\bin\Debug\DCTSetting.pdb
+D:\Asp.Net_Project\DCTSetting\DCTSetting\bin\Debug\CSkin.dll
+D:\Asp.Net_Project\DCTSetting\DCTSetting\bin\Debug\CSkin.xml
+D:\Asp.Net_Project\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.exe
+D:\Asp.Net_Project\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.pdb
+D:\Asp.Net_Project\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.csprojResolveAssemblyReference.cache
+D:\GitHub\DCTSetting\DCTSetting\bin\Debug\DCTSetting.exe.config
+D:\GitHub\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.exe
+D:\GitHub\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.pdb
