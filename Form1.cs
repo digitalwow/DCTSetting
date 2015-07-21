@@ -27,6 +27,8 @@ namespace DCTSetting
         public Form1()
         {
             InitializeComponent();
+            int a = 255;
+             String strA = a.ToString("x");
         }
 
        
@@ -106,7 +108,7 @@ namespace DCTSetting
             string result = "";
             dct_content[0] = 0x6B;
             dct_content[1] = 0xFF;
-            dct_content[2] = 0x40;
+            dct_content[2] = 0x20;
 
             if (CheckAll_Field()) //do write DCT
             {
@@ -122,10 +124,11 @@ namespace DCTSetting
                 ParseIP2Byte(txtgeteway.Text, 15, ref dct_content);// geteway IP
                 ParseIP2Byte(txtnetmask.Text, 19, ref dct_content);// netmask IP
                 ParseIP2Byte(txtsrvip.Text, 23, ref dct_content);// Server IP
-                ParseIP2Byte(txtport.Text.Substring(0, 2), 27, ref dct_content); //port
-                ParseIP2Byte(txtport.Text.Substring(2, 2), 28, ref dct_content); //port
-                ParseIP2Byte(txtport.Text.Substring(0, 2), 29, ref dct_content); //port
-                ParseIP2Byte(txtport.Text.Substring(2, 2), 30, ref dct_content); //port
+                string port16 = Convert.ToString(int.Parse(txtport.Text), 16);
+                ParsePort2Byte(port16.Substring(0, 2), 27, ref dct_content);//port
+                ParsePort2Byte(port16.Substring(2, 2), 28, ref dct_content); //port                
+                ParsePort2Byte(port16.Substring(0, 2), 29, ref dct_content); //port
+                ParsePort2Byte(port16.Substring(2, 2), 30, ref dct_content); //port
                 ParseIP2Byte("0.0.0.0", 31, ref dct_content); //netaddress
 
                 Byte xor = 0;
@@ -138,24 +141,116 @@ namespace DCTSetting
                
                 for (int i = 0; i < dct_content.Length; i++)
                 {
-                    if (i==20)
-                        result += "\n" + dct_content[i].ToString();
-                    else
-                        result += " " + dct_content[i].ToString();
+                    result += " " + dct_content[i].ToString("X2");
+                    //a.ToString("x")
+                    //if (i==20)
+                    //    result += "\n" + dct_content[i].ToString();
+                    //else
+                    //    result += " " + dct_content[i].ToString();
                     
                 }
             }
-            lblmsg.Text = "Result:\n" + result;
-            listBox2.Items.Insert(0,result);
+            textBox1.Text =  result;
+            
         }
 
+        private static byte[] strToToHexByte(string hexString)
+        {
+            hexString = hexString.Replace(" ", "");
+            if ((hexString.Length % 2) != 0)
+                hexString += " ";
+            byte[] returnBytes = new byte[hexString.Length / 4];
+            for (int i = 0; i < returnBytes.Length; i++)
+                returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 4), 16);
+            return returnBytes;
+        }
+
+        public static string byteToHexStr(byte[] bytes)
+        {
+            string returnStr = "";
+            if (bytes != null)
+            {
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    returnStr += bytes[i].ToString("X2");
+                }
+            }
+            return returnStr;
+        } 
         private void ParseIP2Byte(string ipaddress, int intstart, ref byte[] dct_content)
         {
             string[] ss = ipaddress.Split('.');
             for (int i = 0; i < ss.Length; i++)
+            {
                 dct_content[intstart + i] = Convert.ToByte(String.Format("{0:X}", ss[i]));
+            }
 
             // (byte)ss[i];//
+        }
+
+        private void ParsePort2Byte(string port, int intstart, ref byte[] dct_content)
+        {
+            string str = "0x" + port;
+            int x = Convert.ToInt32(str, 16);
+
+            dct_content[intstart] = (byte)x;
+            //for (int i = 0; i < ss.Length; i++)
+            //{
+            //    dct_content[intstart + i] = System.Text.Encoding.Default.GetBytes("ff");// byte.Parse("1");// Convert.ToByte(String.Format("{0:X}", Convert.ToInt32(ss[i]), 16));
+            //}
+        }
+
+
+        /// <summary>
+        /// 十六进制换算为十进制
+        /// </summary>
+        /// <param name="strColorValue"></param>
+        /// <returns></returns>
+        public int GetHexadecimalValue(String strColorValue)
+        {
+            char[] nums = strColorValue.ToCharArray();
+            int total = 0;
+            try
+            {
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    String strNum = nums[i].ToString().ToUpper();
+                    switch (strNum)
+                    {
+                        case "A":
+                            strNum = "10";
+                            break;
+                        case "B":
+                            strNum = "11";
+                            break;
+                        case "C":
+                            strNum = "12";
+                            break;
+                        case "D":
+                            strNum = "13";
+                            break;
+                        case "E":
+                            strNum = "14";
+                            break;
+                        case "F":
+                            strNum = "15";
+                            break;
+                        default:
+                            break;
+                    }
+                    double power = Math.Pow(16, Convert.ToDouble(nums.Length - i - 1));
+                    total += Convert.ToInt32(strNum) * Convert.ToInt32(power);
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                String strErorr = ex.ToString();
+                return 0;
+            }
+
+
+            return total;
         }
 
         private void txtdctname_Leave(object sender, EventArgs e)
@@ -350,6 +445,7 @@ namespace DCTSetting
 
         private void skinButton2_Click(object sender, EventArgs e)
         {
+           // string aaa = Convert.ToString(txtport.Text, 2); 
             string strMsg = txtsend.Text.Trim();// +"\r\n";
             byte[] arrMsg = System.Text.Encoding.UTF8.GetBytes(strMsg); // 将要发送的字符串转换成Utf-8字节数组；
 
@@ -364,7 +460,17 @@ namespace DCTSetting
             ShowMsg(strMsg);
            // txtMsgSend.Clear();
             ShowMsg(" 群发完毕～～～");
-        }  
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           // byte[] returnBytes = byteToHexStr(txtport.Text);
+
+          //  label1.Text = returnBytes.ToString();
+
+        }
+
+
 
 
     }
