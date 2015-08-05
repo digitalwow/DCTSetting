@@ -20,3 +20,15 @@ D:\GitHub\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.csprojResolveAssemblyRe
 D:\GitHub\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.Form1.resources
 D:\GitHub\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.Properties.Resources.resources
 D:\GitHub\DCTSetting\DCTSetting\obj\x86\Debug\DCTSetting.csproj.GenerateResource.Cache
+D:\GitHub\C#\DCTSetting\bin\Debug\DCTSetting.exe.config
+D:\GitHub\C#\DCTSetting\obj\x86\Debug\DCTSetting.exe
+D:\GitHub\C#\DCTSetting\obj\x86\Debug\DCTSetting.pdb
+D:\GitHub\C#\DCTSetting\bin\Debug\DCTSetting.exe
+D:\GitHub\C#\DCTSetting\bin\Debug\DCTSetting.pdb
+D:\GitHub\C#\DCTSetting\bin\Debug\CSkin.dll
+D:\GitHub\C#\DCTSetting\bin\Debug\CSkin.xml
+D:\GitHub\C#\DCTSetting\obj\x86\Debug\DCTSetting.csprojResolveAssemblyReference.cache
+D:\GitHub\C#\DCTSetting\obj\x86\Debug\DCTSetting.Form1.resources
+D:\GitHub\C#\DCTSetting\obj\x86\Debug\DCTSetting.Properties.Resources.resources
+D:\GitHub\C#\DCTSetting\obj\x86\Debug\DCTSetting.csproj.GenerateResource.Cache
+D:\GitHub\C#\DCTSetting\bin\Debug\MySql.Data.dll

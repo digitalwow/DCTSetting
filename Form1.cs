@@ -15,6 +15,7 @@ namespace DCTSetting
 {
     public partial class Form1 : CCSkinMain
     {
+        private IList<Models_Dtc_List> objDtc_List;
         private delegate void AddTextBoxHandler(TextBox objbox, string value);
         private delegate void AddListItemHandler(ListBox objList, string value);
         private delegate void RemoveListItemHandler(ListBox objList, string value);
@@ -22,15 +23,54 @@ namespace DCTSetting
         Socket socketWatch = null;
 
         Dictionary<string, Socket> dict = new Dictionary<string, Socket>();
-        Dictionary<string, Thread> dictThread = new Dictionary<string, Thread>();  
-
+        Dictionary<string, Thread> dictThread = new Dictionary<string, Thread>();
+        BusinessAccess objAccess = new BusinessAccess();
         public Form1()
         {
             InitializeComponent();
-            int a = 255;
-             String strA = a.ToString("x");
+           // objDtc_List = objAccess.DCT_LIST();
+            Run();
         }
 
+        private void Run()
+        {
+
+            ListItem item_success1 = new ListItem("10", "成功");
+            ListItem item_success2 = new ListItem("20", "提示");
+            ListItem item_success3 = new ListItem("30", "錯誤");
+            cbxsuccess.Items.Add(item_success1);
+            cbxsuccess.Items.Add(item_success2);
+            cbxsuccess.Items.Add(item_success3);
+            cbxsuccess.SelectedIndex = 0;
+            cbxsuccess.SelectedItem = item_success1;
+            this.cbxsuccess.DisplayMember = "Name";
+            this.cbxsuccess.ValueMember = "ID"; 
+
+            ListItem item_cbxvoice1 = new ListItem("1", "不响");
+            ListItem item_cbxvoice2 = new ListItem("2", "長音");
+            ListItem item_cbxvoice3 = new ListItem("3", "短音");
+            cbxvoice.Items.Add(item_cbxvoice1);
+            cbxvoice.Items.Add(item_cbxvoice2);
+            cbxvoice.Items.Add(item_cbxvoice3);
+            cbxvoice.SelectedIndex = 0;
+            cbxvoice.SelectedItem = item_cbxvoice1;
+            cbxvoice.DisplayMember =  "Name";
+             cbxvoice.DisplayMember  = "ID"; 
+
+            ListItem item_light1 = new ListItem("1", "不亮");
+            ListItem item_light2 = new ListItem("2", "長亮");
+            ListItem item_light3 = new ListItem("3", "短亮");
+            cbxlight.Items.Add(item_light1);
+            cbxlight.Items.Add(item_light2);
+            cbxlight.Items.Add(item_light3);
+            cbxlight.SelectedIndex = 0;
+            cbxlight.SelectedItem = item_light1;
+            cbxlight.DisplayMember = "Name";
+             cbxlight.DisplayMember = "ID"; 
+            
+            
+           
+        }
        
 
         private void CheckIP(CCWin.SkinControl.SkinTextBox objtext,string text)
@@ -105,6 +145,7 @@ namespace DCTSetting
         public byte[] dct_content = new byte[36];
         private void btnsubmit_Click(object sender, EventArgs e)
         {
+
             string result = "";
             dct_content[0] = 0x6B;
             dct_content[1] = 0xFF;
@@ -150,7 +191,7 @@ namespace DCTSetting
                     
                 }
             }
-            textBox1.Text =  result;
+            textBox1.Text = txtsend.Text=  result.Trim();
             
         }
 
@@ -201,57 +242,7 @@ namespace DCTSetting
         }
 
 
-        /// <summary>
-        /// 十六进制换算为十进制
-        /// </summary>
-        /// <param name="strColorValue"></param>
-        /// <returns></returns>
-        public int GetHexadecimalValue(String strColorValue)
-        {
-            char[] nums = strColorValue.ToCharArray();
-            int total = 0;
-            try
-            {
-                for (int i = 0; i < nums.Length; i++)
-                {
-                    String strNum = nums[i].ToString().ToUpper();
-                    switch (strNum)
-                    {
-                        case "A":
-                            strNum = "10";
-                            break;
-                        case "B":
-                            strNum = "11";
-                            break;
-                        case "C":
-                            strNum = "12";
-                            break;
-                        case "D":
-                            strNum = "13";
-                            break;
-                        case "E":
-                            strNum = "14";
-                            break;
-                        case "F":
-                            strNum = "15";
-                            break;
-                        default:
-                            break;
-                    }
-                    double power = Math.Pow(16, Convert.ToDouble(nums.Length - i - 1));
-                    total += Convert.ToInt32(strNum) * Convert.ToInt32(power);
-                }
-
-            }
-            catch (System.Exception ex)
-            {
-                String strErorr = ex.ToString();
-                return 0;
-            }
-
-
-            return total;
-        }
+        
 
         private void txtdctname_Leave(object sender, EventArgs e)
         {
@@ -467,6 +458,56 @@ namespace DCTSetting
            // byte[] returnBytes = byteToHexStr(txtport.Text);
 
           //  label1.Text = returnBytes.ToString();
+
+        }
+
+        private void skinButton1_Click(object sender, EventArgs e)
+        {
+            ListItem listItem_C = cbxsuccess.SelectedItem as ListItem;
+            ListItem listItem_V = cbxvoice.SelectedItem as ListItem;
+            ListItem listItem_L = cbxlight.SelectedItem as ListItem;
+
+            string a = "$DCT," + listItem_C.ID + "," + listItem_V.ID + "," + listItem_L.ID + "," + txtsu1.Text.Trim() + "," + txtsu2.Text.Trim() + ",*";
+            txtsend2dtc.Text = a;
+            //byte[] temp = { 0x6B ,0xFF,0x20};
+            byte[] temp = new byte[0];
+            string aa = txtsend.Text = Utility.Parse2ASCII(a, temp, 0);
+            //
+        }
+
+        private void txtgeteway_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cbxsuccess_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            txt2DTC();
+        }
+
+        private void cbxvoice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txt2DTC();
+        }
+
+        private void cbxlight_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txt2DTC();
+        }
+
+        private void txtsu1_Paint(object sender, PaintEventArgs e)
+        {
+            txt2DTC();
+        }
+
+        private void txtsu2_Paint(object sender, PaintEventArgs e)
+        {
+            txt2DTC();
+        }
+
+        private void txt2DTC()
+        {
 
         }
 
