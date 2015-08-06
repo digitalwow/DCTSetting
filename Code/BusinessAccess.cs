@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO.Ports;
 using System.IO;
+using System.Net.Sockets;
 
 namespace DCTSetting
 {
@@ -16,6 +17,21 @@ namespace DCTSetting
         {
             return objAccess.DCT_LIST();
         }
+
+
+        public static Int16 Send2DTC(Dictionary<string, Socket> obj_socket, string strkey, byte[] obj_byte)
+        {
+            try
+            {
+                obj_socket[strkey].Send(obj_byte);
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         static public string Parse2String(string strmsg, string strip)
         {
             // int step = workflow_setup[index_step];

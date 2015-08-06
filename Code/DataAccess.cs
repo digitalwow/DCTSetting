@@ -11,6 +11,7 @@ using System.IO;
 
 
 
+
 namespace DCTSetting
 {
     
@@ -22,6 +23,7 @@ namespace DCTSetting
         Utility objUti = new Utility();
         static string strSql;
         public string ErrorMsg = "";
+
 
         public static Models_CarParement Car_Parement(string[] strData)
         {

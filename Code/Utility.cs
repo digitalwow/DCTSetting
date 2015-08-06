@@ -61,34 +61,89 @@ namespace DCTSetting
         }
 
 
-        public static string Parse2ASCII(string strval, byte[] byte_item, int intstart = 0)
+
+        public string Parse2ASCII(string strval)
         {
             string result = "";
 
+            byte[] array_list = Parse2Byte(strval, 0);
+          
+            for (int i = 0; i < array_list.Length; i++)            
+                result += " " + array_list[i].ToString("X2");
+
+            
+            return result.Trim();
+        }
+
+        public static string byte2string(byte[] array_list)
+        {
+            string result = "";
+            for (int i = 0; i < array_list.Length; i++)
+                result += " " + array_list[i].ToString("X2");
+
+
+            return result.Trim();
+        }
+
+        public static byte[] Parse2Byte(string strval, int intstart = 0)
+        {
             byte[] array = System.Text.Encoding.ASCII.GetBytes(strval.Trim());
-            byte[] array_list = new byte[array.Length + byte_item.Length + 1];
-            if (byte_item.Length > 0)
-                byte_item.CopyTo(array_list, 0);
+            byte[] array_list = new byte[array.Length + 1];
+            //if (byte_item.Length > 0)
+            //    byte_item.CopyTo(array_list, 0);
             array.CopyTo(array_list, intstart);
             Byte xor = 0;
-            for (Byte i = 0; i < array.Length; i++)
-            {
+            for (Byte i = 1; i < array.Length - 1; i++)
                 xor ^= array[i];
-            }
+
             array_list[array.Length] = xor;
+            return array_list;
+        }
 
+        public static byte[] GetBytes(string hexString, out int discarded)
+        {
 
-            for (int i = 0; i < array_list.Length; i++)
+            discarded = 0;
+
+            string newString = "";
+
+            char c;// remove all none A-F, 0-9, characters
+            for (int i = 0; i < hexString.Length; i++)
             {
-                result += " " + array_list[i].ToString("X2");
-                //a.ToString("x")
-                //if (i==20)
-                //    result += "\n" + dct_content[i].ToString();
-                //else
-                //    result += " " + dct_content[i].ToString();
+
+                c = hexString[i];
+                if (Uri.IsHexDigit(c))
+
+                    newString += c;
+
+                else
+
+                    discarded++;
+
+            }// if odd number of characters, discard last character
+            if (newString.Length % 2 != 0)
+            {
+                discarded++;
+
+                newString = newString.Substring(0, newString.Length - 1);
+            }
+
+            int byteLength = newString.Length / 2;
+            byte[] bytes = new byte[byteLength];
+            string hex;
+            int j = 0;
+            for (int i = 0; i < bytes.Length; i++)
+            {
+
+                hex = new String(new Char[] { newString[j], newString[j + 1] });
+
+                bytes[i] = byte.Parse(hex);//HexToByte(hex);               
+                j = j + 2;
 
             }
-            return result.Trim();
+
+            return bytes;
+
         }
         //public static string[] MulGetHardwareInfo(Enum_Utility.HardwareEnum hardType, string propKey)
         //{

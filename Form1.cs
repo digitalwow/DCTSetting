@@ -21,7 +21,7 @@ namespace DCTSetting
         private delegate void RemoveListItemHandler(ListBox objList, string value);
         Thread threadWatch = null; // 负责监听客户端连接请求的 线程；  
         Socket socketWatch = null;
-
+        Utility objUti = new Utility();
         Dictionary<string, Socket> dict = new Dictionary<string, Socket>();
         Dictionary<string, Thread> dictThread = new Dictionary<string, Thread>();
         BusinessAccess objAccess = new BusinessAccess();
@@ -35,9 +35,9 @@ namespace DCTSetting
         private void Run()
         {
 
-            ListItem item_success1 = new ListItem("10", "成功");
-            ListItem item_success2 = new ListItem("20", "提示");
-            ListItem item_success3 = new ListItem("30", "錯誤");
+            ListItem item_success1 = new ListItem("0A", "成功");
+            ListItem item_success2 = new ListItem("14", "提示");
+            ListItem item_success3 = new ListItem("1E", "錯誤");
             cbxsuccess.Items.Add(item_success1);
             cbxsuccess.Items.Add(item_success2);
             cbxsuccess.Items.Add(item_success3);
@@ -53,7 +53,7 @@ namespace DCTSetting
             cbxvoice.Items.Add(item_cbxvoice2);
             cbxvoice.Items.Add(item_cbxvoice3);
             cbxvoice.SelectedIndex = 0;
-            cbxvoice.SelectedItem = item_cbxvoice1;
+            cbxvoice.SelectedItem = item_cbxvoice2;
             cbxvoice.DisplayMember =  "Name";
              cbxvoice.DisplayMember  = "ID"; 
 
@@ -64,7 +64,7 @@ namespace DCTSetting
             cbxlight.Items.Add(item_light2);
             cbxlight.Items.Add(item_light3);
             cbxlight.SelectedIndex = 0;
-            cbxlight.SelectedItem = item_light1;
+            cbxlight.SelectedItem = item_light2;
             cbxlight.DisplayMember = "Name";
              cbxlight.DisplayMember = "ID"; 
             
@@ -375,8 +375,12 @@ namespace DCTSetting
                 //{
                 try
                 {
-                string strMsg = System.Text.Encoding.UTF8.GetString(arrMsgRec, 0, length);// 将接受到的字节数据转化成字符串；  
-                ShowMsg(strMsg);
+                    string strMsg = System.Text.Encoding.UTF8.GetString(arrMsgRec, 0, length);// 将接受到的字节数据转化成字符串；
+                    
+                    ShowMsg(strMsg);
+                    Send2DCT(txtsend.Text.Trim(), sokClient.RemoteEndPoint.ToString());
+               // ShowMsg(sokClient.RemoteEndPoint.ToString());
+
                 }
                 catch { }
                 //}
@@ -415,23 +419,38 @@ namespace DCTSetting
 
         private void skinButton3_Click(object sender, EventArgs e)
         {
-            string strMsg = txtsend.Text.Trim();// +"\r\n";
-            byte[] arrMsg = System.Text.Encoding.UTF8.GetBytes(strMsg); // 将要发送的字符串转换成Utf-8字节数组；  
-            byte[] arrSendMsg = new byte[arrMsg.Length + 1];
-            arrSendMsg[0] = 0; // 表示发送的是消息数据  
-            Buffer.BlockCopy(arrMsg, 0, arrSendMsg, 1, arrMsg.Length);
-            string strKey = "";
-            strKey = listBox1.Text.Trim();
-            if (string.IsNullOrEmpty(strKey))   // 判断是不是选择了发送的对象；  
+            Send2DCT(txtsend.Text.Trim(), listBox1.Text.Trim());
+            //string strKey = "";
+            //strKey = listBox1.Text.Trim();
+            //byte[] byte_temp = byte_temp = Utility.Parse2Byte(txtsend.Text.Trim(), 0);
+            //Int16 int16 =  BusinessAccess.Send2DTC(dict, strKey, byte_temp);
+            //ShowMsg(strKey);
+            //txtsendhex.Text = Utility.byte2string(byte_temp);
+            //if (int16 == 0)
+            //{
+            //    ShowMsg("Error");
+                
+            //}
+            
+
+        }
+
+        private void Send2DCT(string strcontent, string strip)
+        {
+            if (strcontent.Trim().Length > 0)
             {
-                MessageBox.Show("请选择你要发送的好友！！！");
+                byte[] byte_temp = byte_temp = Utility.Parse2Byte(strcontent, 0);
+                Int16 int16 = BusinessAccess.Send2DTC(dict, strip, byte_temp);
+                // ShowMsg(strKey);
+                txtsendhex.Text = Utility.byte2string(byte_temp);
+                if (int16 == 0)
+                {
+                    ShowMsg("Error");
+
+                }
             }
             else
-            {
-                dict[strKey].Send(arrSendMsg);// 解决了 sokConnection是局部变量，不能再本函数中引用的问题；  
-                ShowMsg(strMsg);
-                //txtMsgSend.Clear();
-            }  
+                ShowMsg("No Content");
         }
 
         private void skinButton2_Click(object sender, EventArgs e)
@@ -467,11 +486,14 @@ namespace DCTSetting
             ListItem listItem_V = cbxvoice.SelectedItem as ListItem;
             ListItem listItem_L = cbxlight.SelectedItem as ListItem;
 
-            string a = "$DCT," + listItem_C.ID + "," + listItem_V.ID + "," + listItem_L.ID + "," + txtsu1.Text.Trim() + "," + txtsu2.Text.Trim() + ",*";
+            string a = "$DCT," + listItem_C.ID + "," + listItem_V.ID + "," + listItem_L.ID + "," + txtsu2.Text.Trim() + "," + txtsu1.Text.Trim() + ",521,*";
             txtsend2dtc.Text = a;
             //byte[] temp = { 0x6B ,0xFF,0x20};
             byte[] temp = new byte[0];
-            string aa = txtsend.Text = Utility.Parse2ASCII(a, temp, 0);
+            
+
+            string aa = txthex.Text = objUti.Parse2ASCII(a);
+            txtsend.Text = a + aa.Substring(2 > aa.Length ? 0 : aa.Length - 2);
             //
         }
 
@@ -509,6 +531,31 @@ namespace DCTSetting
         private void txt2DTC()
         {
 
+        }
+
+        private void btnonline_Click(object sender, EventArgs e)
+        {
+            string strKey = listBox1.Text.Trim();
+            byte[] byte_temp = { 0x6b, 0xfe, 0x00, 0x95 };
+            Int16 int16 = BusinessAccess.Send2DTC(dict, strKey, byte_temp);
+            ShowMsg(strKey +" Send OnLine");
+            if (int16 == 0)
+                ShowMsg("Error");
+        }
+
+        private void btndtcinfo_Click(object sender, EventArgs e)
+        {
+            string strKey = listBox1.Text.Trim();
+            byte[] byte_temp = { 0x6b, 0xfd, 0x00, 0x96 };
+            Int16 int16 = BusinessAccess.Send2DTC(dict, strKey, byte_temp);
+            ShowMsg(strKey + " Send Info");
+            if (int16 == 0)
+                ShowMsg("Error");
+        }
+
+        private void skinButton4_Click(object sender, EventArgs e)
+        {
+            txtMsg.Text = "";
         }
 
 
