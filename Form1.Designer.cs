@@ -35,6 +35,16 @@
             CCWin.SkinControl.Animation animation1 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnstop = new CCWin.SkinControl.SkinButton();
+            this.skinLabel17 = new CCWin.SkinControl.SkinLabel();
+            this.txtmmsg = new CCWin.SkinControl.SkinTextBox();
+            this.skinLabel16 = new CCWin.SkinControl.SkinLabel();
+            this.cbxtype = new CCWin.SkinControl.SkinComboBox();
+            this.skinLabel15 = new CCWin.SkinControl.SkinLabel();
+            this.txtcontent = new CCWin.SkinControl.SkinTextBox();
+            this.txtsendhex = new System.Windows.Forms.TextBox();
+            this.txthex = new System.Windows.Forms.TextBox();
+            this.skinButton4 = new CCWin.SkinControl.SkinButton();
             this.btndtcinfo = new CCWin.SkinControl.SkinButton();
             this.btnonline = new CCWin.SkinControl.SkinButton();
             this.txtsu1 = new CCWin.SkinControl.SkinTextBox();
@@ -63,7 +73,6 @@
             this.txtrealip = new CCWin.SkinControl.SkinTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
             this.btnsubmit = new CCWin.SkinControl.SkinButton();
@@ -78,22 +87,24 @@
             this.skinLabel5 = new CCWin.SkinControl.SkinLabel();
             this.txtsrvip = new CCWin.SkinControl.SkinTextBox();
             this.txtgeteway = new CCWin.SkinControl.SkinTextBox();
-            this.skinTabControl1 = new CCWin.SkinControl.SkinTabControl();
-            this.skinButton4 = new CCWin.SkinControl.SkinButton();
-            this.cbxhex = new CCWin.SkinControl.SkinCheckBox();
-            this.txthex = new System.Windows.Forms.TextBox();
-            this.txtsendhex = new System.Windows.Forms.TextBox();
+            this.tabcon = new CCWin.SkinControl.SkinTabControl();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.skinDataGridView1)).BeginInit();
             this.tabPage1.SuspendLayout();
-            this.skinTabControl1.SuspendLayout();
+            this.tabcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnstop);
+            this.tabPage2.Controls.Add(this.skinLabel17);
+            this.tabPage2.Controls.Add(this.txtmmsg);
+            this.tabPage2.Controls.Add(this.skinLabel16);
+            this.tabPage2.Controls.Add(this.cbxtype);
+            this.tabPage2.Controls.Add(this.skinLabel15);
+            this.tabPage2.Controls.Add(this.txtcontent);
             this.tabPage2.Controls.Add(this.txtsendhex);
             this.tabPage2.Controls.Add(this.txthex);
-            this.tabPage2.Controls.Add(this.cbxhex);
             this.tabPage2.Controls.Add(this.skinButton4);
             this.tabPage2.Controls.Add(this.btndtcinfo);
             this.tabPage2.Controls.Add(this.btnonline);
@@ -128,6 +139,190 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "TCP Server";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnstop
+            // 
+            this.btnstop.BackColor = System.Drawing.Color.Transparent;
+            this.btnstop.BaseColor = System.Drawing.Color.Red;
+            this.btnstop.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btnstop.DownBack = null;
+            this.btnstop.Location = new System.Drawing.Point(152, 327);
+            this.btnstop.MouseBack = null;
+            this.btnstop.Name = "btnstop";
+            this.btnstop.NormlBack = null;
+            this.btnstop.Size = new System.Drawing.Size(145, 33);
+            this.btnstop.TabIndex = 54;
+            this.btnstop.Text = "Stop Server";
+            this.btnstop.UseVisualStyleBackColor = false;
+            this.btnstop.Click += new System.EventHandler(this.btnstop_Click);
+            // 
+            // skinLabel17
+            // 
+            this.skinLabel17.AutoSize = true;
+            this.skinLabel17.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel17.BorderColor = System.Drawing.Color.White;
+            this.skinLabel17.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel17.Location = new System.Drawing.Point(630, 37);
+            this.skinLabel17.Name = "skinLabel17";
+            this.skinLabel17.Size = new System.Drawing.Size(23, 20);
+            this.skinLabel17.TabIndex = 53;
+            this.skinLabel17.Text = "__";
+            // 
+            // txtmmsg
+            // 
+            this.txtmmsg.BackColor = System.Drawing.Color.Transparent;
+            this.txtmmsg.DownBack = null;
+            this.txtmmsg.Enabled = false;
+            this.txtmmsg.Icon = null;
+            this.txtmmsg.IconIsButton = false;
+            this.txtmmsg.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.txtmmsg.IsPasswordChat = '\0';
+            this.txtmmsg.IsSystemPasswordChar = false;
+            this.txtmmsg.Lines = new string[] {
+        "previous N-OK"};
+            this.txtmmsg.Location = new System.Drawing.Point(716, 31);
+            this.txtmmsg.Margin = new System.Windows.Forms.Padding(0);
+            this.txtmmsg.MaxLength = 32767;
+            this.txtmmsg.MinimumSize = new System.Drawing.Size(28, 28);
+            this.txtmmsg.MouseBack = null;
+            this.txtmmsg.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.txtmmsg.Multiline = false;
+            this.txtmmsg.Name = "txtmmsg";
+            this.txtmmsg.NormlBack = null;
+            this.txtmmsg.Padding = new System.Windows.Forms.Padding(5);
+            this.txtmmsg.ReadOnly = false;
+            this.txtmmsg.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtmmsg.Size = new System.Drawing.Size(195, 28);
+            // 
+            // 
+            // 
+            this.txtmmsg.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtmmsg.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtmmsg.SkinTxt.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F);
+            this.txtmmsg.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.txtmmsg.SkinTxt.Name = "BaseText";
+            this.txtmmsg.SkinTxt.Size = new System.Drawing.Size(185, 18);
+            this.txtmmsg.SkinTxt.TabIndex = 0;
+            this.txtmmsg.SkinTxt.Text = "previous N-OK";
+            this.txtmmsg.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.txtmmsg.SkinTxt.WaterText = "";
+            this.txtmmsg.TabIndex = 44;
+            this.txtmmsg.Text = "previous N-OK";
+            this.txtmmsg.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtmmsg.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.txtmmsg.WaterText = "";
+            this.txtmmsg.WordWrap = true;
+            // 
+            // skinLabel16
+            // 
+            this.skinLabel16.AutoSize = true;
+            this.skinLabel16.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel16.BorderColor = System.Drawing.Color.White;
+            this.skinLabel16.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel16.Location = new System.Drawing.Point(630, 10);
+            this.skinLabel16.Name = "skinLabel16";
+            this.skinLabel16.Size = new System.Drawing.Size(46, 20);
+            this.skinLabel16.TabIndex = 52;
+            this.skinLabel16.Text = "分類?";
+            // 
+            // cbxtype
+            // 
+            this.cbxtype.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxtype.FormattingEnabled = true;
+            this.cbxtype.Location = new System.Drawing.Point(716, 6);
+            this.cbxtype.Name = "cbxtype";
+            this.cbxtype.Size = new System.Drawing.Size(121, 24);
+            this.cbxtype.TabIndex = 51;
+            this.cbxtype.WaterText = "";
+            this.cbxtype.SelectedIndexChanged += new System.EventHandler(this.cbxtype_SelectedIndexChanged);
+            // 
+            // skinLabel15
+            // 
+            this.skinLabel15.AutoSize = true;
+            this.skinLabel15.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel15.BorderColor = System.Drawing.Color.White;
+            this.skinLabel15.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel15.Location = new System.Drawing.Point(630, 147);
+            this.skinLabel15.Name = "skinLabel15";
+            this.skinLabel15.Size = new System.Drawing.Size(46, 20);
+            this.skinLabel15.TabIndex = 50;
+            this.skinLabel15.Text = "內容?";
+            // 
+            // txtcontent
+            // 
+            this.txtcontent.BackColor = System.Drawing.Color.Transparent;
+            this.txtcontent.DownBack = null;
+            this.txtcontent.Icon = null;
+            this.txtcontent.IconIsButton = false;
+            this.txtcontent.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.txtcontent.IsPasswordChat = '\0';
+            this.txtcontent.IsSystemPasswordChar = false;
+            this.txtcontent.Lines = new string[] {
+        "0"};
+            this.txtcontent.Location = new System.Drawing.Point(716, 147);
+            this.txtcontent.Margin = new System.Windows.Forms.Padding(0);
+            this.txtcontent.MaxLength = 32767;
+            this.txtcontent.MinimumSize = new System.Drawing.Size(28, 28);
+            this.txtcontent.MouseBack = null;
+            this.txtcontent.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.txtcontent.Multiline = false;
+            this.txtcontent.Name = "txtcontent";
+            this.txtcontent.NormlBack = null;
+            this.txtcontent.Padding = new System.Windows.Forms.Padding(5);
+            this.txtcontent.ReadOnly = false;
+            this.txtcontent.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtcontent.Size = new System.Drawing.Size(195, 28);
+            // 
+            // 
+            // 
+            this.txtcontent.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtcontent.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtcontent.SkinTxt.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F);
+            this.txtcontent.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.txtcontent.SkinTxt.Name = "BaseText";
+            this.txtcontent.SkinTxt.Size = new System.Drawing.Size(185, 18);
+            this.txtcontent.SkinTxt.TabIndex = 0;
+            this.txtcontent.SkinTxt.Text = "0";
+            this.txtcontent.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.txtcontent.SkinTxt.WaterText = "";
+            this.txtcontent.TabIndex = 43;
+            this.txtcontent.Text = "0";
+            this.txtcontent.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtcontent.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.txtcontent.WaterText = "";
+            this.txtcontent.WordWrap = true;
+            // 
+            // txtsendhex
+            // 
+            this.txtsendhex.Location = new System.Drawing.Point(634, 399);
+            this.txtsendhex.Multiline = true;
+            this.txtsendhex.Name = "txtsendhex";
+            this.txtsendhex.Size = new System.Drawing.Size(284, 54);
+            this.txtsendhex.TabIndex = 49;
+            // 
+            // txthex
+            // 
+            this.txthex.Location = new System.Drawing.Point(634, 279);
+            this.txthex.Multiline = true;
+            this.txthex.Name = "txthex";
+            this.txthex.Size = new System.Drawing.Size(284, 87);
+            this.txthex.TabIndex = 48;
+            // 
+            // skinButton4
+            // 
+            this.skinButton4.BackColor = System.Drawing.Color.Transparent;
+            this.skinButton4.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.skinButton4.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.skinButton4.DownBack = null;
+            this.skinButton4.Location = new System.Drawing.Point(213, 17);
+            this.skinButton4.MouseBack = null;
+            this.skinButton4.Name = "skinButton4";
+            this.skinButton4.NormlBack = null;
+            this.skinButton4.Size = new System.Drawing.Size(84, 63);
+            this.skinButton4.TabIndex = 46;
+            this.skinButton4.Text = "Clean";
+            this.skinButton4.UseVisualStyleBackColor = false;
+            this.skinButton4.Click += new System.EventHandler(this.skinButton4_Click);
             // 
             // btndtcinfo
             // 
@@ -172,7 +367,7 @@
             this.txtsu1.IsSystemPasswordChar = false;
             this.txtsu1.Lines = new string[] {
         "2/3"};
-            this.txtsu1.Location = new System.Drawing.Point(716, 133);
+            this.txtsu1.Location = new System.Drawing.Point(716, 181);
             this.txtsu1.Margin = new System.Windows.Forms.Padding(0);
             this.txtsu1.MaxLength = 32767;
             this.txtsu1.MinimumSize = new System.Drawing.Size(28, 28);
@@ -216,7 +411,7 @@
             this.txtsu2.IsSystemPasswordChar = false;
             this.txtsu2.Lines = new string[] {
         "O X"};
-            this.txtsu2.Location = new System.Drawing.Point(716, 171);
+            this.txtsu2.Location = new System.Drawing.Point(716, 213);
             this.txtsu2.Margin = new System.Windows.Forms.Padding(0);
             this.txtsu2.MaxLength = 32767;
             this.txtsu2.MinimumSize = new System.Drawing.Size(28, 28);
@@ -255,7 +450,7 @@
             this.skinLabel14.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel14.BorderColor = System.Drawing.Color.White;
             this.skinLabel14.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel14.Location = new System.Drawing.Point(630, 171);
+            this.skinLabel14.Location = new System.Drawing.Point(630, 213);
             this.skinLabel14.Name = "skinLabel14";
             this.skinLabel14.Size = new System.Drawing.Size(55, 20);
             this.skinLabel14.TabIndex = 41;
@@ -267,7 +462,7 @@
             this.skinLabel13.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel13.BorderColor = System.Drawing.Color.White;
             this.skinLabel13.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel13.Location = new System.Drawing.Point(630, 133);
+            this.skinLabel13.Location = new System.Drawing.Point(630, 181);
             this.skinLabel13.Name = "skinLabel13";
             this.skinLabel13.Size = new System.Drawing.Size(55, 20);
             this.skinLabel13.TabIndex = 40;
@@ -279,7 +474,7 @@
             this.skinLabel12.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel12.BorderColor = System.Drawing.Color.White;
             this.skinLabel12.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel12.Location = new System.Drawing.Point(630, 88);
+            this.skinLabel12.Location = new System.Drawing.Point(630, 120);
             this.skinLabel12.Name = "skinLabel12";
             this.skinLabel12.Size = new System.Drawing.Size(46, 20);
             this.skinLabel12.TabIndex = 39;
@@ -291,7 +486,7 @@
             this.skinLabel11.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel11.BorderColor = System.Drawing.Color.White;
             this.skinLabel11.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel11.Location = new System.Drawing.Point(630, 60);
+            this.skinLabel11.Location = new System.Drawing.Point(630, 92);
             this.skinLabel11.Name = "skinLabel11";
             this.skinLabel11.Size = new System.Drawing.Size(46, 20);
             this.skinLabel11.TabIndex = 38;
@@ -303,7 +498,7 @@
             this.skinLabel10.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel10.BorderColor = System.Drawing.Color.White;
             this.skinLabel10.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel10.Location = new System.Drawing.Point(630, 30);
+            this.skinLabel10.Location = new System.Drawing.Point(630, 62);
             this.skinLabel10.Name = "skinLabel10";
             this.skinLabel10.Size = new System.Drawing.Size(46, 20);
             this.skinLabel10.TabIndex = 37;
@@ -313,7 +508,7 @@
             // 
             this.cbxsuccess.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbxsuccess.FormattingEnabled = true;
-            this.cbxsuccess.Location = new System.Drawing.Point(716, 30);
+            this.cbxsuccess.Location = new System.Drawing.Point(716, 62);
             this.cbxsuccess.Name = "cbxsuccess";
             this.cbxsuccess.Size = new System.Drawing.Size(121, 24);
             this.cbxsuccess.TabIndex = 36;
@@ -323,7 +518,7 @@
             // 
             this.cbxlight.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbxlight.FormattingEnabled = true;
-            this.cbxlight.Location = new System.Drawing.Point(716, 90);
+            this.cbxlight.Location = new System.Drawing.Point(716, 120);
             this.cbxlight.Name = "cbxlight";
             this.cbxlight.Size = new System.Drawing.Size(121, 24);
             this.cbxlight.TabIndex = 35;
@@ -333,7 +528,7 @@
             // 
             this.cbxvoice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbxvoice.FormattingEnabled = true;
-            this.cbxvoice.Location = new System.Drawing.Point(716, 60);
+            this.cbxvoice.Location = new System.Drawing.Point(716, 92);
             this.cbxvoice.Name = "cbxvoice";
             this.cbxvoice.Size = new System.Drawing.Size(121, 24);
             this.cbxvoice.TabIndex = 34;
@@ -349,7 +544,7 @@
             this.txtsend2dtc.IsPasswordChat = '\0';
             this.txtsend2dtc.IsSystemPasswordChar = false;
             this.txtsend2dtc.Lines = new string[0];
-            this.txtsend2dtc.Location = new System.Drawing.Point(634, 218);
+            this.txtsend2dtc.Location = new System.Drawing.Point(634, 248);
             this.txtsend2dtc.Margin = new System.Windows.Forms.Padding(0);
             this.txtsend2dtc.MaxLength = 32767;
             this.txtsend2dtc.MinimumSize = new System.Drawing.Size(28, 28);
@@ -386,7 +581,7 @@
             this.skinButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.skinButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.skinButton1.DownBack = null;
-            this.skinButton1.Location = new System.Drawing.Point(634, 337);
+            this.skinButton1.Location = new System.Drawing.Point(634, 371);
             this.skinButton1.MouseBack = null;
             this.skinButton1.Name = "skinButton1";
             this.skinButton1.NormlBack = null;
@@ -447,7 +642,7 @@
             this.txtsend.Location = new System.Drawing.Point(6, 366);
             this.txtsend.Multiline = true;
             this.txtsend.Name = "txtsend";
-            this.txtsend.Size = new System.Drawing.Size(284, 87);
+            this.txtsend.Size = new System.Drawing.Size(291, 87);
             this.txtsend.TabIndex = 30;
             // 
             // txtMsg
@@ -456,7 +651,7 @@
             this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMsg.Size = new System.Drawing.Size(284, 233);
+            this.txtMsg.Size = new System.Drawing.Size(291, 233);
             this.txtMsg.TabIndex = 29;
             // 
             // listBox1
@@ -643,7 +838,6 @@
             this.tabPage1.BackColor = System.Drawing.Color.Transparent;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.skinLabel1);
             this.tabPage1.Controls.Add(this.btnsubmit);
@@ -673,16 +867,6 @@
             this.label1.Size = new System.Drawing.Size(43, 17);
             this.label1.TabIndex = 18;
             this.label1.Text = "label1";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(278, 148);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
@@ -1048,7 +1232,7 @@
             this.txtgeteway.WordWrap = true;
             this.txtgeteway.Paint += new System.Windows.Forms.PaintEventHandler(this.txtgeteway_Paint);
             // 
-            // skinTabControl1
+            // tabcon
             // 
             animation1.AnimateOnlyDifferences = false;
             animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
@@ -1065,87 +1249,36 @@
             animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
             animation1.TimeCoeff = 2F;
             animation1.TransparencyCoeff = 0F;
-            this.skinTabControl1.Animation = animation1;
-            this.skinTabControl1.AnimatorType = CCWin.SkinControl.AnimationType.HorizSlide;
-            this.skinTabControl1.CloseRect = new System.Drawing.Rectangle(2, 2, 12, 12);
-            this.skinTabControl1.Controls.Add(this.tabPage2);
-            this.skinTabControl1.Controls.Add(this.tabPage1);
-            this.skinTabControl1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.skinTabControl1.HeadBack = null;
-            this.skinTabControl1.ImgTxtOffset = new System.Drawing.Point(0, 0);
-            this.skinTabControl1.ItemSize = new System.Drawing.Size(70, 36);
-            this.skinTabControl1.Location = new System.Drawing.Point(22, 47);
-            this.skinTabControl1.Name = "skinTabControl1";
-            this.skinTabControl1.PageArrowDown = ((System.Drawing.Image)(resources.GetObject("skinTabControl1.PageArrowDown")));
-            this.skinTabControl1.PageArrowHover = ((System.Drawing.Image)(resources.GetObject("skinTabControl1.PageArrowHover")));
-            this.skinTabControl1.PageCloseHover = ((System.Drawing.Image)(resources.GetObject("skinTabControl1.PageCloseHover")));
-            this.skinTabControl1.PageCloseNormal = ((System.Drawing.Image)(resources.GetObject("skinTabControl1.PageCloseNormal")));
-            this.skinTabControl1.PageDown = ((System.Drawing.Image)(resources.GetObject("skinTabControl1.PageDown")));
-            this.skinTabControl1.PageHover = ((System.Drawing.Image)(resources.GetObject("skinTabControl1.PageHover")));
-            this.skinTabControl1.PageImagePosition = CCWin.SkinControl.SkinTabControl.ePageImagePosition.Left;
-            this.skinTabControl1.PageNorml = null;
-            this.skinTabControl1.SelectedIndex = 0;
-            this.skinTabControl1.Size = new System.Drawing.Size(934, 495);
-            this.skinTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.skinTabControl1.TabIndex = 18;
-            // 
-            // skinButton4
-            // 
-            this.skinButton4.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton4.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.skinButton4.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton4.DownBack = null;
-            this.skinButton4.Location = new System.Drawing.Point(213, 17);
-            this.skinButton4.MouseBack = null;
-            this.skinButton4.Name = "skinButton4";
-            this.skinButton4.NormlBack = null;
-            this.skinButton4.Size = new System.Drawing.Size(84, 63);
-            this.skinButton4.TabIndex = 46;
-            this.skinButton4.Text = "Clean";
-            this.skinButton4.UseVisualStyleBackColor = false;
-            this.skinButton4.Click += new System.EventHandler(this.skinButton4_Click);
-            // 
-            // cbxhex
-            // 
-            this.cbxhex.AutoSize = true;
-            this.cbxhex.BackColor = System.Drawing.Color.Transparent;
-            this.cbxhex.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.cbxhex.DownBack = null;
-            this.cbxhex.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxhex.Location = new System.Drawing.Point(176, 334);
-            this.cbxhex.MouseBack = null;
-            this.cbxhex.Name = "cbxhex";
-            this.cbxhex.NormlBack = null;
-            this.cbxhex.SelectedDownBack = null;
-            this.cbxhex.SelectedMouseBack = null;
-            this.cbxhex.SelectedNormlBack = null;
-            this.cbxhex.Size = new System.Drawing.Size(88, 21);
-            this.cbxhex.TabIndex = 47;
-            this.cbxhex.Text = "Hex Mode";
-            this.cbxhex.UseVisualStyleBackColor = false;
-            // 
-            // txthex
-            // 
-            this.txthex.Location = new System.Drawing.Point(634, 249);
-            this.txthex.Multiline = true;
-            this.txthex.Name = "txthex";
-            this.txthex.Size = new System.Drawing.Size(284, 87);
-            this.txthex.TabIndex = 48;
-            // 
-            // txtsendhex
-            // 
-            this.txtsendhex.Location = new System.Drawing.Point(634, 366);
-            this.txtsendhex.Multiline = true;
-            this.txtsendhex.Name = "txtsendhex";
-            this.txtsendhex.Size = new System.Drawing.Size(284, 87);
-            this.txtsendhex.TabIndex = 49;
+            this.tabcon.Animation = animation1;
+            this.tabcon.AnimatorType = CCWin.SkinControl.AnimationType.HorizSlide;
+            this.tabcon.CloseRect = new System.Drawing.Rectangle(2, 2, 12, 12);
+            this.tabcon.Controls.Add(this.tabPage2);
+            this.tabcon.Controls.Add(this.tabPage1);
+            this.tabcon.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tabcon.HeadBack = null;
+            this.tabcon.ImgTxtOffset = new System.Drawing.Point(0, 0);
+            this.tabcon.ItemSize = new System.Drawing.Size(70, 36);
+            this.tabcon.Location = new System.Drawing.Point(22, 47);
+            this.tabcon.Name = "tabcon";
+            this.tabcon.PageArrowDown = ((System.Drawing.Image)(resources.GetObject("tabcon.PageArrowDown")));
+            this.tabcon.PageArrowHover = ((System.Drawing.Image)(resources.GetObject("tabcon.PageArrowHover")));
+            this.tabcon.PageCloseHover = ((System.Drawing.Image)(resources.GetObject("tabcon.PageCloseHover")));
+            this.tabcon.PageCloseNormal = ((System.Drawing.Image)(resources.GetObject("tabcon.PageCloseNormal")));
+            this.tabcon.PageDown = ((System.Drawing.Image)(resources.GetObject("tabcon.PageDown")));
+            this.tabcon.PageHover = ((System.Drawing.Image)(resources.GetObject("tabcon.PageHover")));
+            this.tabcon.PageImagePosition = CCWin.SkinControl.SkinTabControl.ePageImagePosition.Left;
+            this.tabcon.PageNorml = null;
+            this.tabcon.SelectedIndex = 0;
+            this.tabcon.Size = new System.Drawing.Size(934, 495);
+            this.tabcon.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabcon.TabIndex = 18;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(963, 549);
-            this.Controls.Add(this.skinTabControl1);
+            this.Controls.Add(this.tabcon);
             this.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.Name = "Form1";
             this.Text = "DCT Setting";
@@ -1154,7 +1287,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.skinDataGridView1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.skinTabControl1.ResumeLayout(false);
+            this.tabcon.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1176,7 +1309,7 @@
         private CCWin.SkinControl.SkinLabel skinLabel5;
         private CCWin.SkinControl.SkinTextBox txtsrvip;
         private CCWin.SkinControl.SkinTextBox txtgeteway;
-        private CCWin.SkinControl.SkinTabControl skinTabControl1;
+        private CCWin.SkinControl.SkinTabControl tabcon;
         private CCWin.SkinControl.SkinButton skinButton3;
         private CCWin.SkinControl.SkinButton skinButton2;
         private CCWin.SkinControl.SkinButton btnstartserver;
@@ -1189,7 +1322,6 @@
         private System.Windows.Forms.TextBox txtMsg;
         private System.Windows.Forms.TextBox txtsend;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private CCWin.SkinControl.SkinDataGridView skinDataGridView1;
         private CCWin.SkinControl.SkinTextBox txtsend2dtc;
@@ -1207,9 +1339,15 @@
         private CCWin.SkinControl.SkinButton btndtcinfo;
         private CCWin.SkinControl.SkinButton btnonline;
         private CCWin.SkinControl.SkinButton skinButton4;
-        private CCWin.SkinControl.SkinCheckBox cbxhex;
         private System.Windows.Forms.TextBox txthex;
         private System.Windows.Forms.TextBox txtsendhex;
+        private CCWin.SkinControl.SkinLabel skinLabel15;
+        private CCWin.SkinControl.SkinTextBox txtcontent;
+        private CCWin.SkinControl.SkinLabel skinLabel16;
+        private CCWin.SkinControl.SkinComboBox cbxtype;
+        private CCWin.SkinControl.SkinLabel skinLabel17;
+        private CCWin.SkinControl.SkinTextBox txtmmsg;
+        private CCWin.SkinControl.SkinButton btnstop;
     }
 }
 

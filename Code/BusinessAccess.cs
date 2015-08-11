@@ -9,17 +9,51 @@ namespace DCTSetting
 {
     class BusinessAccess
     {
-        
+        public static Dictionary<string, Socket> Socket;
+        public string DTC_Message , DTC_Name , DTC_Error = "" ;
+       // public string DTC_Name = "";
         DataAccess objAccess = new DataAccess();
         Utility objUti = new Utility();
+
+        public static byte[] byte_online = { 0x6b, 0xfe, 0x00, 0x95 };
+        public static byte[] byte_dtc_info = { 0x6b, 0xfd, 0x00, 0x96 };
+        //public socket_info()
+        //{
+
+        //    obj_socket = _obj_socket;
+        //}
+
+        //public static Dictionary<string, Socket> Socket
+        //{
+        //    get
+        //    {
+        //        return obj_socket;
+        //    }
+        //    set
+        //    {
+        //        obj_socket = value;
+        //    }
+        //}
 
         public IList<Models_Dtc_List> DCT_LIST()
         {
             return objAccess.DCT_LIST();
         }
 
+        public static Int16 Send2DTC1(string strkey, byte[] obj_byte)
+        {
+            try
+            {
+                Socket[strkey].Send(obj_byte);
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
 
-        public static Int16 Send2DTC(Dictionary<string, Socket> obj_socket, string strkey, byte[] obj_byte)
+        public static Int16 Send2DTC(ref Dictionary<string, Socket> obj_socket, string strkey, byte[] obj_byte)
         {
             try
             {
@@ -30,6 +64,42 @@ namespace DCTSetting
             {
                 return 0;
             }
+        }
+
+        public Int16 Send2DTC_Return(byte[] _objReceiver, int length, string strip)
+        {
+            string strmsg = System.Text.Encoding.UTF8.GetString(_objReceiver, 0, length);
+            string[] strresult = strmsg.Split(',');
+            try
+            {
+                if (strresult[1].ToString().Equals("10")) // DTC 中傳來訊息
+                {
+                    DTC_Name = strresult[0].ToString();
+                    DTC_Message = strresult[2].ToString();
+                    //CheckUser();
+                    //CheckIQC();
+                    //CheckPrev();
+                    //CheckMyself();
+                    //CheckComponent();
+                    return 1;
+                }
+                else if (strresult[1].ToString().Equals("90"))
+                    return 1;
+                
+                else
+                    return 1;
+            }
+            catch
+            {
+                if (strresult[0].IndexOf("MY MAC") > -1)
+                {
+                    return Send2DTC1(strip, byte_online);
+                    // Int16 int16 = Send2DTC(dict, strip, byte_temp);
+
+                }
+                return 0;
+            }
+
         }
 
         static public string Parse2String(string strmsg, string strip)
@@ -44,6 +114,11 @@ namespace DCTSetting
                 //CheckMyself();
                 //CheckComponent();
             }
+            else if (strresult[0].IndexOf("MY MAC") > -1)
+            {
+                Send2DTC1(strip, byte_online);
+                // Int16 int16 = Send2DTC(dict, strip, byte_temp);
+            }
 
 
             return "";
@@ -56,8 +131,8 @@ namespace DCTSetting
             {
                 if (objport.IsOpen)
                     return 1;
-      
-                
+
+
                 objport.PortName = com; // com_t.Option_Value;
                 objport.Parity = Parity.None;
                 objport.DataBits = 8;
@@ -89,12 +164,12 @@ namespace DCTSetting
             }
         }
 
-        public int Run_Slave_Command(SerialPort objport,string command)
+        public int Run_Slave_Command(SerialPort objport, string command)
         {
             try
             {
                 objport.Write(command);
-                
+
                 return 1;
 
             }
@@ -108,39 +183,18 @@ namespace DCTSetting
         {
             string is_exit = "";
             is_exit = objAccess.CheckUser_access(user_account, stationid);
-            
+
 
 
             return is_exit;
 
         }
 
-        public void ResetForm(Form1 objform)
-        {
-            
-
-
-        }
-        public string SystemStatus(int status)
-        {
-            switch (status)
-            {
-                case 1:
-                    return "Stand By";
-                case 2:
-                    return "RC Mode";
-                case 3:
-                    return "FL Mode";
-                case 4:
-                    return "OA Mode";
-                default:
-                    return "Unknown";
-
-            }
-        }
 
 
 
-      
+
+
+
     }
 }

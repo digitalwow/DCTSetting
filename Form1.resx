@@ -153,7 +153,7 @@
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="skinTabControl1.PageArrowDown" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tabcon.PageArrowDown" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABUAAAAiCAYAAACwaJKDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAA/UlEQVRIS9XTuwqCUBjA8bbu
@@ -164,7 +164,7 @@
         vXvIVAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="skinTabControl1.PageArrowHover" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tabcon.PageArrowHover" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABUAAAAiCAYAAACwaJKDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABMElEQVRIS7XTTUuEQADG8b5A
@@ -176,7 +176,7 @@
         RU5ErkJggg==
 </value>
   </data>
-  <data name="skinTabControl1.PageCloseHover" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tabcon.PageCloseHover" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAB/SURBVChTY/j//z9JGJnDCsV4xWCMM2gYlxhYA8iEMxwdp/+DMIgNw2hiYJtQNHB2nfvPP/0+
@@ -184,7 +184,7 @@
         Q/E0yASwKbjF/jMAACTuwcqqE/ECAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="skinTabControl1.PageCloseNormal" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tabcon.PageCloseNormal" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAACLSURBVChTnZGxDYAwDAQjUSBRMQAFLW2KDEHPAOxBwRSsa3yRsVBEY5CexPa/30mSiITAr1MM
@@ -192,7 +192,7 @@
         ZsZoO5+Wpw7vn0P4DGxCt4RV6B0CLy3pBgS7pxqDLyCRAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="skinTabControl1.PageDown" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tabcon.PageDown" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADsAAAAiCAYAAADh/KHgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAADmSURBVGhD5dirCkJRFEXR6xvfegWDYDAYDBaDwWKwGAwWg8FgMBgEQRAE//26V1hwvmF6YIYV
@@ -202,7 +202,7 @@
         kLazHAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="skinTabControl1.PageHover" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tabcon.PageHover" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADsAAAAiCAYAAADh/KHgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABCElEQVRoQ93Yq05DURRF0cuz

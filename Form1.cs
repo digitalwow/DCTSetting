@@ -19,22 +19,31 @@ namespace DCTSetting
         private delegate void AddTextBoxHandler(TextBox objbox, string value);
         private delegate void AddListItemHandler(ListBox objList, string value);
         private delegate void RemoveListItemHandler(ListBox objList, string value);
+        private delegate void RunText(TextBox objbox, ListBox objList);
         Thread threadWatch = null; // 负责监听客户端连接请求的 线程；  
         Socket socketWatch = null;
         Utility objUti = new Utility();
         Dictionary<string, Socket> dict = new Dictionary<string, Socket>();
         Dictionary<string, Thread> dictThread = new Dictionary<string, Thread>();
-        BusinessAccess objAccess = new BusinessAccess();
+        BusinessAccess objAccess;
         public Form1()
         {
             InitializeComponent();
-           // objDtc_List = objAccess.DCT_LIST();
+            // objDtc_List = objAccess.DCT_LIST();
             Run();
         }
 
         private void Run()
         {
 
+            ListItem item_type1 = new ListItem("@", "訊息");
+            ListItem item_type2 = new ListItem("#", "Parse");
+            ListItem item_type3 = new ListItem("~", "電位");
+            cbxtype.Items.Add(item_type1);
+            cbxtype.Items.Add(item_type2);
+            cbxtype.Items.Add(item_type3);
+            cbxtype.SelectedIndex = 0;
+            cbxtype.SelectedItem = item_type2;
             ListItem item_success1 = new ListItem("0A", "成功");
             ListItem item_success2 = new ListItem("14", "提示");
             ListItem item_success3 = new ListItem("1E", "錯誤");
@@ -43,8 +52,8 @@ namespace DCTSetting
             cbxsuccess.Items.Add(item_success3);
             cbxsuccess.SelectedIndex = 0;
             cbxsuccess.SelectedItem = item_success1;
-            this.cbxsuccess.DisplayMember = "Name";
-            this.cbxsuccess.ValueMember = "ID"; 
+            cbxtype.DisplayMember = this.cbxsuccess.DisplayMember = "Name";
+            cbxtype.ValueMember = this.cbxsuccess.ValueMember = "ID";
 
             ListItem item_cbxvoice1 = new ListItem("1", "不响");
             ListItem item_cbxvoice2 = new ListItem("2", "長音");
@@ -54,8 +63,8 @@ namespace DCTSetting
             cbxvoice.Items.Add(item_cbxvoice3);
             cbxvoice.SelectedIndex = 0;
             cbxvoice.SelectedItem = item_cbxvoice2;
-            cbxvoice.DisplayMember =  "Name";
-             cbxvoice.DisplayMember  = "ID"; 
+            cbxvoice.DisplayMember = "Name";
+            cbxvoice.DisplayMember = "ID";
 
             ListItem item_light1 = new ListItem("1", "不亮");
             ListItem item_light2 = new ListItem("2", "長亮");
@@ -66,14 +75,14 @@ namespace DCTSetting
             cbxlight.SelectedIndex = 0;
             cbxlight.SelectedItem = item_light2;
             cbxlight.DisplayMember = "Name";
-             cbxlight.DisplayMember = "ID"; 
-            
-            
-           
-        }
-       
+            cbxlight.DisplayMember = "ID";
 
-        private void CheckIP(CCWin.SkinControl.SkinTextBox objtext,string text)
+
+
+        }
+
+
+        private void CheckIP(CCWin.SkinControl.SkinTextBox objtext, string text)
         {
             try
             {
@@ -88,7 +97,7 @@ namespace DCTSetting
             }
         }
 
-        private void CheckInteger(CCWin.SkinControl.SkinTextBox objtext,string text)
+        private void CheckInteger(CCWin.SkinControl.SkinTextBox objtext, string text)
         {
             try
             {
@@ -179,7 +188,7 @@ namespace DCTSetting
                 }
                 dct_content[35] = xor;
 
-               
+
                 for (int i = 0; i < dct_content.Length; i++)
                 {
                     result += " " + dct_content[i].ToString("X2");
@@ -188,11 +197,11 @@ namespace DCTSetting
                     //    result += "\n" + dct_content[i].ToString();
                     //else
                     //    result += " " + dct_content[i].ToString();
-                    
+
                 }
             }
-            textBox1.Text = txtsend.Text=  result.Trim();
-            
+            textBox1.Text = txtsend.Text = result.Trim();
+
         }
 
         private static byte[] strToToHexByte(string hexString)
@@ -217,7 +226,7 @@ namespace DCTSetting
                 }
             }
             return returnStr;
-        } 
+        }
         private void ParseIP2Byte(string ipaddress, int intstart, ref byte[] dct_content)
         {
             string[] ss = ipaddress.Split('.');
@@ -242,7 +251,7 @@ namespace DCTSetting
         }
 
 
-        
+
 
         private void txtdctname_Leave(object sender, EventArgs e)
         {
@@ -254,6 +263,16 @@ namespace DCTSetting
         }
 
 
+        private void btnstop_Click(object sender, EventArgs e)
+        {
+            socketWatch.Close();
+            threadWatch.Interrupt();
+            threadWatch.Abort();
+            dict.Clear();
+            BusinessAccess.Socket = dict;
+            dictThread.Clear();
+            ShowMsg("服务器 Stop！");
+        }
         private void btnstartserver_Click(object sender, EventArgs e)
         {
             // 创建负责监听的套接字，注意其中的参数；  
@@ -288,8 +307,8 @@ namespace DCTSetting
             //listenThread = new Thread(start);   
         }
 
-       
-    
+
+
 
         private void AddListItem_Messages(ListBox objList, string value)
         {
@@ -318,10 +337,11 @@ namespace DCTSetting
                 Socket sokConnection = socketWatch.Accept(); // 一旦监听到一个客户端的请求，就返回一个与该客户端通信的 套接字；  
                 // 想列表控件中添加客户端的IP信息；  
 
-                this.Invoke(new AddListItemHandler(this.AddListItem_Messages), listBox1,  sokConnection.RemoteEndPoint.ToString());
+                this.Invoke(new AddListItemHandler(this.AddListItem_Messages), listBox1, sokConnection.RemoteEndPoint.ToString());
                 //listBox1.Items.Add(sokConnection.RemoteEndPoint.ToString());
                 // 将与客户端连接的 套接字 对象添加到集合中；  
                 dict.Add(sokConnection.RemoteEndPoint.ToString(), sokConnection);
+                BusinessAccess.Socket = dict;
                 ShowMsg("客户端连接成功！");
                 Thread thr = new Thread(RecMsg);
                 thr.IsBackground = true;
@@ -352,6 +372,7 @@ namespace DCTSetting
                     ShowMsg("异常：" + se.Message);
                     // 从 通信套接字 集合中删除被中断连接的通信套接字；  
                     dict.Remove(sokClient.RemoteEndPoint.ToString());
+                    BusinessAccess.Socket = dict;
                     // 从通信线程集合中删除被中断连接的通信线程对象；  
                     dictThread.Remove(sokClient.RemoteEndPoint.ToString());
                     // 从列表中移除被中断的连接IP  
@@ -364,6 +385,7 @@ namespace DCTSetting
                     ShowMsg("异常：" + e.Message);
                     // 从 通信套接字 集合中删除被中断连接的通信套接字；  
                     dict.Remove(sokClient.RemoteEndPoint.ToString());
+                    BusinessAccess.Socket = dict;
                     // 从通信线程集合中删除被中断连接的通信线程对象；  
                     dictThread.Remove(sokClient.RemoteEndPoint.ToString());
                     // 从列表中移除被中断的连接IP  
@@ -371,35 +393,20 @@ namespace DCTSetting
                     //listBox1.Items.Remove(sokClient.RemoteEndPoint.ToString());
                     break;
                 }
-                //if (arrMsgRec[0] == 0)  // 表示接收到的是数据；  
-                //{
+
                 try
                 {
-                    string strMsg = System.Text.Encoding.UTF8.GetString(arrMsgRec, 0, length);// 将接受到的字节数据转化成字符串；
-                    
-                    ShowMsg(strMsg);
-                    Send2DCT(txtsend.Text.Trim(), sokClient.RemoteEndPoint.ToString());
-               // ShowMsg(sokClient.RemoteEndPoint.ToString());
+                    objAccess = new BusinessAccess();
+                    if (objAccess.Send2DTC_Return(arrMsgRec, length, sokClient.RemoteEndPoint.ToString()) == 1)
+                    {
 
+                        ShowMsg(objAccess.DTC_Name + ":" + objAccess.DTC_Message);
+                        this.Invoke(new RunText(this.RunTextBox), txtsend, listBox1);
+                        //Send2DCT(txtsend.Text.Trim(), listBox1.Text.Trim());
+                    }
                 }
                 catch { }
-                //}
-                //if (arrMsgRec[0] == 1) // 表示接收到的是文件；  
-                //{
-                //    SaveFileDialog sfd = new SaveFileDialog();
-
-                //    if (sfd.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                //    {// 在上边的 sfd.ShowDialog（） 的括号里边一定要加上 this 否则就不会弹出 另存为 的对话框，而弹出的是本类的其他窗口，，这个一定要注意！！！【解释：加了this的sfd.ShowDialog(this)，“另存为”窗口的指针才能被SaveFileDialog的对象调用，若不加thisSaveFileDialog 的对象调用的是本类的其他窗口了，当然不弹出“另存为”窗口。】  
-
-                //        string fileSavePath = sfd.FileName;// 获得文件保存的路径；  
-                //        // 创建文件流，然后根据路径创建文件；  
-                //        using (FileStream fs = new FileStream(fileSavePath, FileMode.Create))
-                //        {
-                //            fs.Write(arrMsgRec, 1, length - 1);
-                //            ShowMsg("文件保存成功：" + fileSavePath);
-                //        }
-                //    }
-                //}
+                
             }
         }
 
@@ -414,7 +421,7 @@ namespace DCTSetting
         void ShowMsg(string str)
         {
             this.Invoke(new AddTextBoxHandler(this.AddTextBox_Messages), txtMsg, "(" + DateTime.Now.Millisecond + ") " + str);
-           // txtMsg.AppendText(str + "\r\n");
+            // txtMsg.AppendText(str + "\r\n");
         }
 
         private void skinButton3_Click(object sender, EventArgs e)
@@ -429,9 +436,9 @@ namespace DCTSetting
             //if (int16 == 0)
             //{
             //    ShowMsg("Error");
-                
+
             //}
-            
+
 
         }
 
@@ -440,7 +447,7 @@ namespace DCTSetting
             if (strcontent.Trim().Length > 0)
             {
                 byte[] byte_temp = byte_temp = Utility.Parse2Byte(strcontent, 0);
-                Int16 int16 = BusinessAccess.Send2DTC(dict, strip, byte_temp);
+                Int16 int16 = BusinessAccess.Send2DTC(ref dict, strip, byte_temp);
                 // ShowMsg(strKey);
                 txtsendhex.Text = Utility.byte2string(byte_temp);
                 if (int16 == 0)
@@ -449,13 +456,18 @@ namespace DCTSetting
 
                 }
             }
-            else
-                ShowMsg("No Content");
+            //else
+            //    ShowMsg("No Content");
+        }
+
+        private void RunTextBox(TextBox a, ListBox b)
+        {
+            Send2DCT(a.Text.Trim(), b.Text.Trim());
         }
 
         private void skinButton2_Click(object sender, EventArgs e)
         {
-           // string aaa = Convert.ToString(txtport.Text, 2); 
+            // string aaa = Convert.ToString(txtport.Text, 2); 
             string strMsg = txtsend.Text.Trim();// +"\r\n";
             byte[] arrMsg = System.Text.Encoding.UTF8.GetBytes(strMsg); // 将要发送的字符串转换成Utf-8字节数组；
 
@@ -468,29 +480,37 @@ namespace DCTSetting
                 s.Send(arrSendMsg);
             }
             ShowMsg(strMsg);
-           // txtMsgSend.Clear();
+            // txtMsgSend.Clear();
             ShowMsg(" 群发完毕～～～");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           // byte[] returnBytes = byteToHexStr(txtport.Text);
+            // byte[] returnBytes = byteToHexStr(txtport.Text);
 
-          //  label1.Text = returnBytes.ToString();
+            //  label1.Text = returnBytes.ToString();
 
         }
 
         private void skinButton1_Click(object sender, EventArgs e)
         {
+            ListItem listItem_T = cbxtype.SelectedItem as ListItem;
             ListItem listItem_C = cbxsuccess.SelectedItem as ListItem;
             ListItem listItem_V = cbxvoice.SelectedItem as ListItem;
             ListItem listItem_L = cbxlight.SelectedItem as ListItem;
+            string strmsg = "";
+            if (listItem_T.ID == "@")
+            {
 
-            string a = "$DCT," + listItem_C.ID + "," + listItem_V.ID + "," + listItem_L.ID + "," + txtsu2.Text.Trim() + "," + txtsu1.Text.Trim() + ",521,*";
+                strmsg = txtmmsg.Text;
+               
+            }
+
+            string a = "$DCT," + listItem_T.ID + listItem_C.ID + strmsg + "," + listItem_V.ID + "," + listItem_L.ID + "," + txtsu2.Text.Trim() + "," + txtsu1.Text.Trim() + "," + txtcontent.Text + ",*";
             txtsend2dtc.Text = a;
             //byte[] temp = { 0x6B ,0xFF,0x20};
             byte[] temp = new byte[0];
-            
+
 
             string aa = txthex.Text = objUti.Parse2ASCII(a);
             txtsend.Text = a + aa.Substring(2 > aa.Length ? 0 : aa.Length - 2);
@@ -535,10 +555,13 @@ namespace DCTSetting
 
         private void btnonline_Click(object sender, EventArgs e)
         {
+           
+           
             string strKey = listBox1.Text.Trim();
-            byte[] byte_temp = { 0x6b, 0xfe, 0x00, 0x95 };
-            Int16 int16 = BusinessAccess.Send2DTC(dict, strKey, byte_temp);
-            ShowMsg(strKey +" Send OnLine");
+            Int16 int16 = BusinessAccess.Send2DTC1(strKey, BusinessAccess.byte_online);
+            //byte[] byte_temp = { 0x6b, 0xfe, 0x00, 0x95 };
+            //Int16 int16 = BusinessAccess.Send2DTC(ref dict, strKey, byte_temp);
+            ShowMsg(strKey + " Send OnLine");
             if (int16 == 0)
                 ShowMsg("Error");
         }
@@ -546,8 +569,9 @@ namespace DCTSetting
         private void btndtcinfo_Click(object sender, EventArgs e)
         {
             string strKey = listBox1.Text.Trim();
-            byte[] byte_temp = { 0x6b, 0xfd, 0x00, 0x96 };
-            Int16 int16 = BusinessAccess.Send2DTC(dict, strKey, byte_temp);
+            Int16 int16 = BusinessAccess.Send2DTC1(strKey, BusinessAccess.byte_dtc_info);
+            //byte[] byte_temp = { 0x6b, 0xfd, 0x00, 0x96 };
+            //Int16 int16 = BusinessAccess.Send2DTC(ref dict, strKey, byte_temp);
             ShowMsg(strKey + " Send Info");
             if (int16 == 0)
                 ShowMsg("Error");
@@ -557,6 +581,21 @@ namespace DCTSetting
         {
             txtMsg.Text = "";
         }
+
+        private void cbxtype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListItem listItem_T = cbxtype.SelectedItem as ListItem;
+            if (listItem_T.ID == "@")
+            {
+                txtmmsg.Enabled = true;
+                txtmmsg.Text = "";
+                txtmmsg.Focus();
+            }
+            else
+                txtmmsg.Enabled = false;
+        }
+
+
 
 
 

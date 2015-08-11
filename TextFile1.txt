@@ -1,0 +1,3 @@
+﻿前一站未結束		previous N-OK
+本站尚未結束		myself N-OK
+使用者逾時
